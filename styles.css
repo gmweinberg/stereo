@@ -1,0 +1,135 @@
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    transition: transform 0.3s ease;
+    background-color: black; /* Dark background for better immersion */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Container styles */
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Image container styles for stereoscopic viewing */
+.image-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Default layout (side by side for landscape) */
+.image-container {
+    flex-direction: row;
+}
+
+/* Portrait mode (stacked) */
+.portrait-mode .image-container {
+    flex-direction: column;
+}
+
+/* Force rotation for old device that doesn't auto-rotate */
+.force-rotate {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Image styles for stereoscopic viewing */
+.stereo-image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.stereo-image {
+    /* Optimized for fullscreen viewing, covering the eye area */
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain; /* Keep aspect ratio while filling space */
+}
+
+/* Navigation styles optimized for stereoscopic viewing */
+.nav-link {
+    /* Positioned off-screen but accessible via tab */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 8px 16px;
+    background-color: rgba(51, 51, 51, 0.7);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10;
+    opacity: 0.8;
+}
+
+/* Make nav link more visible when not in stereoscopic mode */
+.nav-visible .nav-link {
+    opacity: 1;
+}
+
+/* Show nav when tabbed to or hovered */
+.nav-link:focus, 
+.nav-link:hover, 
+.nav-link:active {
+    opacity: 1;
+    outline: 2px solid white;
+}
+
+/* Controls section for device settings */
+.device-controls {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 10;
+    opacity: 0.8;
+}
+
+.device-controls button {
+    margin-right: 5px;
+    padding: 8px 16px;
+    background-color: rgba(51, 51, 51, 0.7);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.device-controls button:hover {
+    opacity: 1;
+    background-color: rgba(85, 85, 85, 0.8);
+}
+
+/* For old phone portrait mode - rotated content */
+.old-phone-portrait .image-container {
+    flex-direction: row; /* Side by side */
+}
+
+/* Hide controls in stereoscopic mode */
+.stereo-mode .device-controls,
+.stereo-mode .nav-link {
+    opacity: 0.1; /* Nearly invisible but still accessible */
+}
+
+/* Divider between images */
+.image-divider {
+    width: 1px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+}
